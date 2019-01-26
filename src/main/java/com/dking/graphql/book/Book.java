@@ -1,6 +1,8 @@
 package com.dking.graphql.book;
 
 import com.dking.graphql.author.Author;
+import io.leangen.graphql.annotations.GraphQLContext;
+import io.leangen.graphql.annotations.GraphQLQuery;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,7 +18,7 @@ import java.util.Set;
 
 @Entity
 public class Book {
-        private int id;
+        private Long id;
         private String title;
         private String description;
         private Set<Author> authors=new HashSet<>();
@@ -27,11 +29,11 @@ public class Book {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        public int getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Long id) {
             this.id = id;
         }
 

@@ -1,12 +1,14 @@
 package com.dking.graphql.book;
 
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLContext;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class BookService {
@@ -17,21 +19,23 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    @GraphQLQuery
     public List<Book> getBooks(){
         return bookRepository.findAll();
     }
 
-    @GraphQLQuery(name = "book")
-    public Optional<Book> getBookById(Long id){
+    @GraphQLQuery(name = "findBook",description = "Find book by id")
+    public Optional<Book> getBookById(@GraphQLArgument(name="id") Long id){
         return bookRepository.findById(id);
     }
 
-    @Transactional
-    public Book saveBook(Book book){
+    @GraphQLQuery
+    public Book saveBook(@GraphQLContext Book book){
         return bookRepository.save(book);
     }
 
-    public void deleteBook(Long id){
+    @GraphQLQuery
+    public void deleteBook(@GraphQLArgument(name="id") Long id){
         bookRepository.deleteById(id);
     }
 }

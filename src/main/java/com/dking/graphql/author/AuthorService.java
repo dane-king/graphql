@@ -1,9 +1,12 @@
 package com.dking.graphql.author;
 
+import com.dking.graphql.book.Book;
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLContext;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,20 +19,23 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
+    @GraphQLQuery
     public List<Author> getAuthors(){
         return authorRepository.findAll();
     }
 
-    public Optional<Author> getAuthorById(Long id){
+    @GraphQLQuery(name="findAuthor",description = "Find author by id")
+    public Optional<Author> getAuthorById(@GraphQLArgument(name="id") Long id){
         return authorRepository.findById(id);
     }
 
-    @Transactional
-    public Author saveAuthor(Author author){
+    @GraphQLQuery
+    public Author saveAuthor(@GraphQLContext Author author){
         return authorRepository.save(author);
     }
 
-    public void deleteAuthor(Long id){
+    @GraphQLQuery
+    public void deleteAuthor(@GraphQLArgument(name="id")Long id){
         authorRepository.deleteById(id);
     }
 }

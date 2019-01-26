@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.dking</groupId>
 	<artifactId>graphql</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>graphql</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -23,22 +23,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		<!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.leangen.graphql</groupId>
 			<artifactId>spqr</artifactId>
 			<version>0.9.9</version>
 		</dependency>
-
-
-
+        <!--runtime dependencies-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -49,6 +47,7 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+        <!--test dependencies-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -65,11 +64,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.8.0</version>
                 <configuration>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArgument>-parameters</compilerArgument>
+                    <testCompilerArgument>-parameters</testCompilerArgument>
                 </configuration>
             </plugin>
 		</plugins>
