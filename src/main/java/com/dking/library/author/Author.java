@@ -1,7 +1,6 @@
-package com.dking.graphql.author;
+package com.dking.library.author;
 
-import com.dking.graphql.book.Book;
-import org.springframework.util.CollectionUtils;
+import com.dking.library.book.Book;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,27 +8,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Author {
-    private int id;
+    private Long id;
     private String name;
-    private Set<Book> books=new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,7 +36,7 @@ public class Author {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     public Set<Book> getBooks() {
         return books;
     }
